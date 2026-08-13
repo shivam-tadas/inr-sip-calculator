@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calculate your Systematic Investment Plan (SIP) returns in real-time with an interactive, modern SIP Calculator.">
-  <title>SIP Calculator — Real-Time Investment Growth</title>
+  <meta name="description" content="Calculate your one-time lumpsum mutual fund investment returns in real-time with an interactive, modern INR Lumpsum Calculator.">
+  <title>Lumpsum Calculator — Real-Time Investment Growth</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
   <div class="ambient-glow glow-3"></div>
 
   <main class="calculator-wrapper">
-    <div class="glass-card" id="sipCalculator">
+    <div class="glass-card" id="lumpsumCalculator">
       <!-- Header with Brand -->
       <header class="card-header">
         <div class="brand">
@@ -27,7 +27,7 @@
             </svg>
           </div>
           <div>
-            <h1 class="brand-title">SIP Calculator</h1>
+            <h1 class="brand-title">Lumpsum Calculator</h1>
           </div>
         </div>
 
@@ -42,7 +42,7 @@
         <span class="result-label">Expected Maturity Amount</span>
         <div class="hero-amount-wrapper">
           <span class="hero-currency" id="displayCurrencySymbol">₹</span>
-          <span class="hero-amount" id="totalMaturityValue">23,23,391</span>
+          <span class="hero-amount" id="totalMaturityValue">3,10,585</span>
         </div>
 
         <!-- Key Metrics Cards -->
@@ -51,14 +51,14 @@
             <div class="metric-indicator"></div>
             <div class="metric-content">
               <span class="metric-title">Invested Amount</span>
-              <span class="metric-value" id="totalInvestedValue">₹12,00,000</span>
+              <span class="metric-value" id="totalInvestedValue">₹1,00,000</span>
             </div>
           </div>
           <div class="metric-card returns">
             <div class="metric-indicator"></div>
             <div class="metric-content">
               <span class="metric-title">Est. Wealth Gain</span>
-              <span class="metric-value" id="totalReturnsValue">₹11,23,391</span>
+              <span class="metric-value" id="totalReturnsValue">₹2,10,585</span>
             </div>
           </div>
         </div>
@@ -66,59 +66,60 @@
         <!-- Visual Proportional Progress Bar -->
         <div class="ratio-bar-container">
           <div class="ratio-bar">
-            <div class="ratio-invested" id="ratioInvestedBar" style="width: 51.65%;"></div>
-            <div class="ratio-returns" id="ratioReturnsBar" style="width: 48.35%;"></div>
+            <div class="ratio-invested" id="ratioInvestedBar" style="width: 32.20%;"></div>
+            <div class="ratio-returns" id="ratioReturnsBar" style="width: 67.80%;"></div>
           </div>
           <div class="ratio-legend">
-            <span class="legend-item"><span class="dot dot-invested"></span> Invested: <strong id="investedPercent">51.7%</strong></span>
-            <span class="legend-item"><span class="dot dot-returns"></span> Gains: <strong id="returnsPercent">48.3%</strong></span>
+            <span class="legend-item"><span class="dot dot-invested"></span> Invested: <strong id="investedPercent">32.2%</strong></span>
+            <span class="legend-item"><span class="dot dot-returns"></span> Gains: <strong id="returnsPercent">67.8%</strong></span>
           </div>
         </div>
       </section>
 
       <!-- Input Controls Section -->
       <section class="inputs-section">
-        <!-- Input 1: Monthly Investment -->
-        <div class="input-group" id="groupMonthly">
+        <!-- Input 1: Total Lumpsum Investment -->
+        <div class="input-group" id="groupInvestment">
           <div class="input-header">
-            <label for="monthlyInvestmentInput" class="input-label">
+            <label for="totalInvestmentInput" class="input-label">
               <span class="label-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
               </span>
-              Monthly Investment
+              Total Investment
             </label>
             <div class="input-box-wrapper">
-              <span class="input-affix" id="monthlyAffix">₹</span>
+              <span class="input-affix" id="investmentAffix">₹</span>
               <input 
                 type="number" 
-                id="monthlyInvestmentInput" 
+                id="totalInvestmentInput" 
                 class="text-input" 
-                value="10000" 
-                min="500" 
-                max="500000" 
-                step="500" 
-                aria-label="Monthly Investment Amount"
+                value="100000" 
+                min="1000" 
+                max="10000000" 
+                step="1000" 
+                aria-label="Total Lumpsum Investment Amount"
               >
             </div>
           </div>
           <div class="slider-wrapper">
             <input 
               type="range" 
-              id="monthlyInvestmentSlider" 
+              id="totalInvestmentSlider" 
               class="range-slider" 
-              value="10000" 
-              min="500" 
-              max="1000000" 
-              step="500"
-              aria-label="Monthly Investment Slider"
+              value="100000" 
+              min="1000" 
+              max="10000000" 
+              step="1000"
+              aria-label="Total Lumpsum Investment Slider"
             >
           </div>
           <div class="presets-row">
-            <button type="button" class="preset-chip" data-target="monthly" data-value="2500">2.5k</button>
-            <button type="button" class="preset-chip" data-target="monthly" data-value="5000">5k</button>
-            <button type="button" class="preset-chip active" data-target="monthly" data-value="10000">10k</button>
-            <button type="button" class="preset-chip" data-target="monthly" data-value="25000">25k</button>
-            <button type="button" class="preset-chip" data-target="monthly" data-value="50000">50k</button>
+            <button type="button" class="preset-chip" data-target="investment" data-value="25000">25k</button>
+            <button type="button" class="preset-chip" data-target="investment" data-value="50000">50k</button>
+            <button type="button" class="preset-chip active" data-target="investment" data-value="100000">1 Lakh</button>
+            <button type="button" class="preset-chip" data-target="investment" data-value="500000">5 Lakh</button>
+            <button type="button" class="preset-chip" data-target="investment" data-value="1000000">10 Lakh</button>
+            <button type="button" class="preset-chip" data-target="investment" data-value="2500000">25 Lakh</button>
           </div>
         </div>
 

@@ -1,12 +1,12 @@
 /**
- * SIP Calculator Engine & Real-time UI Manager (INR Fixed)
+ * Lumpsum Calculator Engine & Real-time UI Manager (INR Fixed)
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   // DOM Elements - Inputs & Sliders
-  const monthlyInput = document.getElementById('monthlyInvestmentInput');
-  const monthlySlider = document.getElementById('monthlyInvestmentSlider');
-  const monthlyAffix = document.getElementById('monthlyAffix');
+  const investmentInput = document.getElementById('totalInvestmentInput');
+  const investmentSlider = document.getElementById('totalInvestmentSlider');
+  const investmentAffix = document.getElementById('investmentAffix');
 
   const rateInput = document.getElementById('returnRateInput');
   const rateSlider = document.getElementById('returnRateSlider');
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * Highlight matching preset chip
    */
   function updatePresetHighlights() {
-    const monthlyVal = parseFloat(monthlyInput.value);
+    const investmentVal = parseFloat(investmentInput.value);
     const rateVal = parseFloat(rateInput.value);
     const durationVal = parseFloat(durationInput.value);
 
@@ -65,8 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = chip.dataset.target;
       const val = parseFloat(chip.dataset.value);
 
-      if (target === 'monthly') {
-        chip.classList.toggle('active', monthlyVal === val);
+      if (target === 'investment') {
+        chip.classList.toggle('active', investmentVal === val);
       } else if (target === 'rate') {
         chip.classList.toggle('active', rateVal === val);
       } else if (target === 'duration') {
@@ -76,28 +76,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /**
-   * Core SIP Calculation
-   * Formula: M = P * ({[1 + i]^n - 1} / i) * (1 + i)
-   * P = Monthly Investment
-   * i = Monthly interest rate (annual rate / 12 / 100)
-   * n = Total number of monthly installments (years * 12)
+   * Core Lumpsum Calculation
+   * Formula: M = P * (1 + r / 100)^t
+   * P = Total Lumpsum Initial Investment
+   * r = Annual Expected Return Rate in percentage
+   * t = Investment Duration in Years
    */
-  function calculateSIP() {
-    const P = Math.max(0, parseFloat(monthlyInput.value) || 0);
+  function calculateLumpsum() {
+    const P = Math.max(0, parseFloat(investmentInput.value) || 0);
     const annualRate = Math.max(0, parseFloat(rateInput.value) || 0);
     const years = Math.max(0, parseFloat(durationInput.value) || 0);
 
-    const n = years * 12;
-    const i = annualRate / (12 * 100);
-
+    const rateFactor = annualRate / 100;
     let maturityAmount = 0;
-    const investedAmount = P * n;
+    const investedAmount = P;
 
-    if (P > 0 && n > 0) {
-      if (i > 0) {
-        maturityAmount = P * ((Math.pow(1 + i, n) - 1) / i) * (1 + i);
+    if (P > 0) {
+      if (years > 0 && annualRate > 0) {
+        maturityAmount = P * Math.pow(1 + rateFactor, years);
       } else {
-        maturityAmount = investedAmount;
+        maturityAmount = P;
       }
     }
 
@@ -108,8 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (displayCurrencySymbol) {
       displayCurrencySymbol.textContent = currentSymbol;
     }
-    if (monthlyAffix) {
-      monthlyAffix.textContent = currentSymbol;
+    if (investmentAffix) {
+      investmentAffix.textContent = currentSymbol;
     }
 
     // Update Sub-metric Cards
@@ -134,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Refresh Slider track fill styling
-    updateSliderFill(monthlySlider);
+    updateSliderFill(investmentSlider);
     updateSliderFill(rateSlider);
     updateSliderFill(durationSlider);
 
@@ -149,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Slider moved -> update input & recalculate
     slider.addEventListener('input', () => {
       input.value = slider.value;
-      calculateSIP();
+      calculateLumpsum();
     });
 
     // Text input typed -> update slider & recalculate
@@ -162,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clamp slider value visually if within or near limits
         slider.value = Math.min(Math.max(val, min), max);
       }
-      calculateSIP();
+      calculateLumpsum();
     });
 
     // On blur, sanitize text input value
@@ -175,12 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
       } else if (!allowDecimals) {
         input.value = Math.round(val);
       }
-      calculateSIP();
+      calculateLumpsum();
     });
   }
 
   // Initialize Input Pairs
-  bindSliderAndInput(monthlySlider, monthlyInput, false);
+  bindSliderAndInput(investmentSlider, investmentInput, false);
   bindSliderAndInput(rateSlider, rateInput, true);
   bindSliderAndInput(durationSlider, durationInput, false);
 
@@ -192,9 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = chip.dataset.target;
       const value = chip.dataset.value;
 
-      if (target === 'monthly') {
-        monthlyInput.value = value;
-        monthlySlider.value = value;
+      if (target === 'investment') {
+        investmentInput.value = value;
+        investmentSlider.value = value;
       } else if (target === 'rate') {
         rateInput.value = value;
         rateSlider.value = value;
@@ -203,10 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
         durationSlider.value = value;
       }
 
-      calculateSIP();
+      calculateLumpsum();
     });
   });
 
   // Initial Calculation on Page Load
-  calculateSIP();
+  calculateLumpsum();
 });

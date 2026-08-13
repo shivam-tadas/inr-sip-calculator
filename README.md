@@ -1,6 +1,6 @@
-# 📈 INR SIP Calculator
+# 📈 INR Lumpsum Calculator
 
-An interactive, modern, and responsive **Systematic Investment Plan (SIP) Calculator** tailored for Indian Rupee (INR ₹) investments. Built with clean Vanilla Web technologies, offering real-time wealth projection and glassmorphic UI aesthetics.
+An interactive, modern, and responsive **Lumpsum Investment Calculator** tailored for Indian Rupee (INR ₹) investments. Built with clean Vanilla Web technologies, offering real-time wealth projection and glassmorphic UI aesthetics.
 
 ---
 
@@ -16,10 +16,10 @@ An interactive, modern, and responsive **Systematic Investment Plan (SIP) Calcul
 ## ✨ Features & Functionality
 
 - **⚡ Instant Real-Time Calculations**: As you slide or type, maturity values, total invested amount, and wealth gains update instantaneously with zero lag.
-- **🇮🇳 Indian Numbering System (`en-IN`)**: Numbers are formatted naturally with Indian comma separators (Lakhs and Crores, e.g., `₹23,23,391`).
+- **🇮🇳 Indian Numbering System (`en-IN`)**: Numbers are formatted naturally with Indian comma separators (Lakhs and Crores, e.g., `₹3,10,585`, `₹1,00,00,000`).
 - **🎛️ Dual Synchronized Controls**: Bidirectional bindings between smooth interactive range sliders and manual number input fields.
 - **⚡ Smart Preset Chips**: One-click preset buttons for common values:
-  - **Monthly Investment**: ₹2.5k, ₹5k, ₹10k, ₹25k, ₹50k
+  - **Total Investment**: ₹25k, ₹50k, ₹1 Lakh, ₹5 Lakh, ₹10 Lakh, ₹25 Lakh
   - **Expected Returns**: 8% (Conservative / Debt), 12% (Broad Index), 15% (Active Equity), 18% (Aggressive / Small-cap)
   - **Tenure**: 5, 10, 15, 20, 25 Years
 - **📊 Proportional Ratio Breakdown Bar**: Dynamic visual comparison bar displaying the percentage split between your actual principal investment and compound growth gains.
@@ -30,22 +30,25 @@ An interactive, modern, and responsive **Systematic Investment Plan (SIP) Calcul
 
 ## 🧮 Mathematical Formula
 
-The application calculates the future maturity value of a monthly SIP using the standard compound interest formula for annuities:
+The application calculates the future maturity value of a one-time lumpsum investment using the standard compound interest formula:
 
-$$M = P \times \left( \frac{(1 + i)^n - 1}{i} \right) \times (1 + i)$$
+$$M = P \times \left(1 + \frac{r}{100}\right)^t$$
 
 Where:
-- **$M$** = Expected Maturity Amount
-- **$P$** = Monthly Investment Amount (₹)
-- **$i$** = Monthly Interest Rate $\left(\frac{\text{Annual Rate}}{12 \times 100}\right)$
-- **$n$** = Total Number of Installments $(\text{Years} \times 12)$
+- **$M$** = Expected Maturity Amount (Future Value)
+- **$P$** = Total Lumpsum Investment Amount (₹)
+- **$r$** = Expected Annual Rate of Return (%)
+- **$t$** = Investment Duration (Years)
+
+### Wealth Gain:
+$$\text{Est. Wealth Gain} = M - P$$
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-inr-sip-calculator/
+inr-lumpsum-calculator/
 ├── index.html       # Semantic HTML5 layout and accessibility markup
 ├── style.css        # Custom CSS design system, variables & glassmorphism theme
 ├── app.js           # Core calculation engine, UI bindings & presets manager
@@ -81,3 +84,4 @@ Then visit `http://localhost:8080` in your browser.
 - **Styling**: Vanilla CSS3 (Custom Properties, Flexbox, CSS Grid, Glassmorphism)
 - **Scripting**: Vanilla JavaScript (ES6+)
 - **Typography**: Google Fonts (*Outfit* & *Plus Jakarta Sans*)
+
