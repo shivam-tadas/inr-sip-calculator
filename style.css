@@ -1,5 +1,5 @@
 /* ==========================================================================
-   INR Lumpsum Calculator - Light Turquoise Theme Design System
+   SIP Calculator - Light Turquoise Theme Design System
    ========================================================================== */
 
 :root {
@@ -505,7 +505,7 @@ body {
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-title);
-  width: 115px;
+  width: 100px;
   padding: 0 0.35rem;
 }
 
